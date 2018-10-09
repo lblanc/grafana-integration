@@ -1,0 +1,7 @@
+*  * 	* * * 	root	/root/work/bin/vsphere-influxdb-go > /dev/null
+*  *    * * *   root    (sleep 10; /root/work/bin/vsphere-influxdb-go) > /dev/null
+*  *    * * *   root    (sleep 20; /root/work/bin/vsphere-influxdb-go) > /dev/null
+*  *    * * *   root    (sleep 30; /root/work/bin/vsphere-influxdb-go) > /dev/null
+*  *    * * *   root    (sleep 40; /root/work/bin/vsphere-influxdb-go) > /dev/null
+*  *    * * *   root    (sleep 50; /root/work/bin/vsphere-influxdb-go) > /dev/null
+#
