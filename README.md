@@ -1,7 +1,6 @@
 ## Docker Image with Telegraf, InfluxDB and Grafana with dashboard & REST script included for [DataCore SANsymphony](http://www.datacore.com)
 
 
-
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://octopress.mit-license.org)
 
 
@@ -29,7 +28,7 @@ docker run --ulimit nofile=66000:66000 \
   -e "DCSREST=X.X.X.X" \
   -e "DCSUNAME=administrator" \
   -e "DCSPWORD=password" \
-  lblanc/docker-influxdb-grafana-datacore:latest
+  lblanc/grafana-integration:latest
 ```
 
 If you want to monitor also vSphere you can add this variables:
@@ -55,7 +54,7 @@ docker run --ulimit nofile=66000:66000 \
   -e "VSPHERE_PASS=password" \
   -e "VSPHERE_VCENTER=X.X.X.X" \
   -e "VSPHERE_DOM=local" \
-  lblanc/docker-influxdb-grafana-datacore:latest
+  lblanc/grafana-integration:latest
 ```
 
 To stop the container launch:
@@ -91,7 +90,7 @@ docker run --ulimit nofile=66000:66000 \
   -e "VSPHERE_PASS=password" \
   -e "VSPHERE_VCENTER=X.X.X.X" \
   -e "VSPHERE_DOM=local" \
-  lblanc/docker-influxdb-grafana-datacore:latest
+  lblanc/grafana-integration:latest
 ```
 
 
