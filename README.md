@@ -28,7 +28,7 @@ docker run --ulimit nofile=66000:66000 \
   -e "DCSREST=X.X.X.X" \
   -e "DCSUNAME=administrator" \
   -e "DCSPWORD=password" \
-  lblanc/grafana-integration:latest
+  lblanc/grafana-integration
 ```
 If you have special characters in the password, do not forget the escapement '\' before (ex: "password!" will be "password\\!")
 
@@ -61,7 +61,7 @@ docker run --ulimit nofile=66000:66000 \
   -e "DCSREST=X.X.X.X" \
   -e "DCSUNAME=administrator" \
   -e "DCSPWORD=password" \
-  lblanc/grafana-integration:latest
+  lblanc/grafana-integration
 ```
 
 
