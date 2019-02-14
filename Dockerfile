@@ -73,7 +73,6 @@ RUN mkdir -p /var/log/supervisor && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     echo 'root:root' | chpasswd && \
     cat /etc/datacore/datacore-cron >> /etc/crontab && \
-    cat /etc/datacore/vsphere-cron >> /etc/crontab && \
     /etc/datacore/setup_mysql.sh && \
     chmod +x /etc/datacore/config.sh
 

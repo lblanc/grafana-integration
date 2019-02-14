@@ -39,7 +39,7 @@ except:
 # Read config file
 config = configparser.ConfigParser()
 try:
-    config.read('datacore_get_perf.ini')
+    config.read('/etc/datacore/datacore_get_perf.ini')
 except:
     print("Config file (datacore_get_perf.ini) not found")
     sys.exit(1)
@@ -64,8 +64,7 @@ headers = {'ServerHost': config['SERVERS']['datacore_server'],
 url_influxdb ='http://{}:{}/write?db=DataCoreRestDB'.format(config['SERVERS']['influxdb_server'],
                                                        config['SERVERS']['influxdb_port'])
 
-dcs_servers = dcs_get_object("servers")
-dcs_servers_hosts = dcs_servers + dcs_get_object("hosts")
+
 
 # lambdas
 
@@ -365,8 +364,12 @@ def put_in_influxdb(datas):
         logging.error(req.text)
 
 
+
+
 if __name__ == "__main__":
     
+    dcs_servers = dcs_get_object("servers")
+    dcs_servers_hosts = dcs_servers + dcs_get_object("hosts")
     resources = [r for r in config['RESOURCES'] if config['RESOURCES'].getboolean(r)]
     
     dcs_objects = []
