@@ -30,8 +30,10 @@ docker run --ulimit nofile=66000:66000 \
   -e "DCSREST=X.X.X.X" \
   -e "DCSUNAME=administrator" \
   -e "DCSPWORD=password" \
-  lblanc/docker-influxdb-grafana-datacore:latest
+  lblanc/grafana-integration:lastest
 ```
+If you have special characters in the password, do not forget the escapement '' before (ex: "password!" will be "password\\!")
+
 
 If you want to monitor also vSphere you can add this variables:
 * VSPHERE_USER -> vSphere user
@@ -56,7 +58,7 @@ docker run --ulimit nofile=66000:66000 \
   -e "VSPHERE_PASS=password" \
   -e "VSPHERE_VCENTER=X.X.X.X" \
   -e "VSPHERE_DOM=local" \
-  lblanc/docker-influxdb-grafana-datacore:latest
+  lblanc/grafana-integration:lastest
 ```
 
 To stop the container launch:
@@ -92,7 +94,7 @@ docker run --ulimit nofile=66000:66000 \
   -e "VSPHERE_PASS=password" \
   -e "VSPHERE_VCENTER=X.X.X.X" \
   -e "VSPHERE_DOM=local" \
-  lblanc/docker-influxdb-grafana-datacore:latest
+  lblanc/grafana-integration:lastest
 ```
 
 
