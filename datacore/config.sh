@@ -3,7 +3,10 @@
 sed -i 's/datacore_server = dcs-ip/datacore_server = '${DCSSVR}'/' /etc/datacore/datacore_get_perf.ini && \
 sed -i 's/rest_server = rest-ip/rest_server = '${DCSREST}'/' /etc/datacore/datacore_get_perf.ini && \
 sed -i 's/user = user/user = '${DCSUNAME}'/' /etc/datacore/datacore_get_perf.ini && \
-sed -i 's/passwd = pass/passwd = '${DCSPWORD}'/' /etc/datacore/datacore_get_perf.ini
+sed -i 's/passwd = pass/passwd = '${DCSPWORD}'/' /etc/datacore/datacore_get_perf.ini && \
+sed -i 's/vcenters = [ "https://ip-vcenter/sdk" ]/vcenters = [ "https://'${VSPHERE_VCENTER}'/sdk" ]/' /etc/telegraf/telegraf.conf && \
+sed -i 's/username = "user"/username = "'${VSPHERE_USER}'"/' /etc/telegraf/telegraf.conf && \
+sed -i 's/password = "pass"/password = "'${VSPHERE_PASS}'"/' /etc/telegraf/telegraf.conf
 
 
 if [ -d "/data" ]; then
@@ -53,6 +56,21 @@ curl --silent --output /dev/null  -X POST \
 echo "Create Grafana DataCore Dashboard"
 python /etc/datacore/datacore-dashboard.py
 
+
+echo "Set DataCore Dashboard as home"
+curl --silent --output /dev/null  -X PUT \
+  http://127.0.0.1:3000/api/user/preferences \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Basic Z3JhZmFuYTpncmFmYW5h' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -d '{"theme":"","homeDashboardId":1,"timezone":""}'
+
+echo "Create Grafana vSphere Dashboards"
+python /etc/datacore/vsphere-host.py
+python /etc/datacore/vsphere-overview.py
+python /etc/datacore/vsphere-vms.py
+python /etc/datacore/vsphere-host.py
 
 
 exec "$@"
