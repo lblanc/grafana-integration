@@ -57,7 +57,6 @@ docker run --ulimit nofile=66000:66000 \
   -e "VSPHERE_USER=administrator@vsphere.local" \
   -e "VSPHERE_PASS=password" \
   -e "VSPHERE_VCENTER=X.X.X.X" \
-  -e "VSPHERE_DOM=local" \
   lblanc/grafana-integration:lastest
 ```
 
@@ -93,7 +92,6 @@ docker run --ulimit nofile=66000:66000 \
   -e "VSPHERE_USER=administrator@vsphere.local" \
   -e "VSPHERE_PASS=password" \
   -e "VSPHERE_VCENTER=X.X.X.X" \
-  -e "VSPHERE_DOM=local" \
   lblanc/grafana-integration:lastest
 ```
 
