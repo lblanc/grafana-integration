@@ -1,11 +1,11 @@
 #!/bin/bash
 
-sed -i 's/datacore_server = dcs-ip/datacore_server = '${DCSSVR}'/' /etc/datacore/datacore_get_perf.ini && \
-sed -i 's/rest_server = rest-ip/rest_server = '${DCSREST}'/' /etc/datacore/datacore_get_perf.ini && \
-sed -i 's/user = user/user = '${DCSUNAME}'/' /etc/datacore/datacore_get_perf.ini && \
-sed -i 's/passwd = pass/passwd = '${DCSPWORD}'/' /etc/datacore/datacore_get_perf.ini && \
-sed -i 's/ip-vcenter/'${VSPHERE_VCENTER}'/' /etc/telegraf/telegraf.conf && \
-sed -i 's/username = "user"/username = "'${VSPHERE_USER}'"/' /etc/telegraf/telegraf.conf && \
+sed -i 's/datacore_server = dcs-ip/datacore_server = '${DCSSVR}'/' /etc/datacore/datacore_get_perf.ini 
+sed -i 's/rest_server = rest-ip/rest_server = '${DCSREST}'/' /etc/datacore/datacore_get_perf.ini 
+sed -i 's/user = user/user = '${DCSUNAME}'/' /etc/datacore/datacore_get_perf.ini 
+sed -i 's/passwd = pass/passwd = '${DCSPWORD}'/' /etc/datacore/datacore_get_perf.ini 
+sed -i 's/ip-vcenter/'${VSPHERE_VCENTER}'/' /etc/telegraf/telegraf.conf 
+sed -i 's/username = "user"/username = "'${VSPHERE_USER}'"/' /etc/telegraf/telegraf.conf 
 sed -i 's/password = "pass"/password = "'${VSPHERE_PASS}'"/' /etc/telegraf/telegraf.conf
 
 
@@ -52,9 +52,23 @@ curl --silent --output /dev/null  -X POST \
   "isdefault":true
 }'
 
+curl --silent --output /dev/null  -X POST \
+  http://127.0.0.1:3000/api/datasources \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Basic Z3JhZmFuYTpncmFmYW5h' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name":"telegraf",
+  "type":"influxdb",
+  "url":"http://localhost:8086",
+  "database":"telegraf",
+  "access":"proxy"
+}'
 
 echo "Create Grafana DataCore Dashboard"
 python /etc/datacore/datacore-dashboard.py
+python /etc/datacore/datacore-overview.py
 
 
 echo "Set DataCore Dashboard as home"
@@ -67,7 +81,7 @@ curl --silent --output /dev/null  -X PUT \
   -d '{"theme":"","homeDashboardId":1,"timezone":""}'
 
 echo "Create Grafana vSphere Dashboards"
-python /etc/datacore/vsphere-host.py
+python /etc/datacore/vsphere-datastore.py
 python /etc/datacore/vsphere-overview.py
 python /etc/datacore/vsphere-vms.py
 python /etc/datacore/vsphere-host.py
