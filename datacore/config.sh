@@ -9,6 +9,7 @@ sed -i 's/username = "user"/username = "'${VSPHERE_USER}'"/' /etc/telegraf/teleg
 sed -i 's/password = "pass"/password = "'${VSPHERE_PASS}'"/' /etc/telegraf/telegraf.conf
 
 
+
 if [ -d "/data" ]; then
   if [ ! -d "/data/mysql" ]; then
   rm /var/lib/influxdb

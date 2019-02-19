@@ -30,7 +30,7 @@ docker run --ulimit nofile=66000:66000 \
   -e "DCSREST=X.X.X.X" \
   -e "DCSUNAME=administrator" \
   -e "DCSPWORD=password" \
-  lblanc/grafana-integration:lastest
+  lblanc/grafana-integration:latest
 ```
 If you have special characters in the password, do not forget the escapement '' before (ex: "password!" will be "password\\!")
 
@@ -57,7 +57,7 @@ docker run --ulimit nofile=66000:66000 \
   -e "VSPHERE_USER=administrator@vsphere.local" \
   -e "VSPHERE_PASS=password" \
   -e "VSPHERE_VCENTER=X.X.X.X" \
-  lblanc/grafana-integration:lastest
+  lblanc/grafana-integration:latest
 ```
 
 To stop the container launch:
@@ -92,7 +92,7 @@ docker run --ulimit nofile=66000:66000 \
   -e "VSPHERE_USER=administrator@vsphere.local" \
   -e "VSPHERE_PASS=password" \
   -e "VSPHERE_VCENTER=X.X.X.X" \
-  lblanc/grafana-integration:lastest
+  lblanc/grafana-integration:latest
 ```
 
 
