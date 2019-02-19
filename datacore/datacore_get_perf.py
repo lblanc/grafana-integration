@@ -259,6 +259,15 @@ def put_in_influxdb(datas):
                     "=".join(["DiskStatus", str(data["DiskStatus"])]),
                     int(data["Performances"]["CollectionTime"][6:-2])*1000000
                 ))
+            result.append(line.format(
+                    table,
+                    instance,
+                    objectname,
+                    host,
+                    add_info,
+                    "=".join(["Size", str(data["Size"]["Value"])]),
+                    int(data["Performances"]["CollectionTime"][6:-2])*1000000
+                ))
         elif "physicaldisks" in data["dcs_resource"]:
             line = "{},instance={},objectname={},host={}{} {} {}"
             table = "DataCore_Physical_disk"
