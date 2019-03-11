@@ -100,6 +100,7 @@ def dcs_monitorid_to_str(i):
         return "Undefined"
 
 
+
 def dcs_get_object(dcs_object):
     """
     Get DataCore Object (ex: servers, virtualdisks...)
@@ -169,6 +170,8 @@ def put_in_influxdb(datas):
             add_info += ",OsVersion=" + data["OsVersion"].replace(" ", "\\ ")
             add_info += ",ProductBuild=" + data["ProductBuild"].replace(" ", "\\ ")
             add_info += ",ProductVersion=" + data["ProductVersion"].replace(" ", "\\ ")
+            add_info += ",ProductName=" + data["ProductName"].replace(" ", "\\ ")
+            add_info += ",ProductType=" + data["ProductType"].replace(" ", "\\ ")
             add_info += ",Caption=" + data["Caption"].replace(" ", "\\ ")
             for k,v in data["Performances"].items():
                 if "CollectionTime" in k:
@@ -191,6 +194,24 @@ def put_in_influxdb(datas):
                 "=".join(["State", str(data["State"])]),
                 int(data["Performances"]["CollectionTime"][6:-2])*1000000
             ))
+            result.append(line.format(
+                table,
+                instance,
+                objectname,
+                host,
+                add_info,
+                "=".join(["CacheState", str(data["CacheState"])]),
+                int(data["Performances"]["CollectionTime"][6:-2])*1000000
+            ))
+            result.append(line.format(
+                table,
+                instance,
+                objectname,
+                host,
+                add_info,
+                "=".join(["PowerState", str(data["PowerState"])]),
+                int(data["Performances"]["CollectionTime"][6:-2])*1000000
+            ))
         elif "pools" in data["dcs_resource"]:
             line = "{},instance={},objectname={},host={}{} {} {}"
             table = "DataCore_Disk_pools"
@@ -200,6 +221,7 @@ def put_in_influxdb(datas):
             host = host.replace(" ", "\\ ")
             # Add specific info
             add_info = ",id=" + data["Id"]
+            add_info += ",InSharedMode=" + str(data["InSharedMode"])
             add_info += ",AutoTieringEnabled=" + str(data["AutoTieringEnabled"])
             add_info += ",Caption=" + data["Caption"].replace(" ", "\\ ")
             for k,v in data["Performances"].items():
@@ -221,6 +243,33 @@ def put_in_influxdb(datas):
                 host,
                 add_info,
                 "=".join(["PoolStatus", str(data["PoolStatus"])]),
+                int(data["Performances"]["CollectionTime"][6:-2])*1000000
+            ))
+            result.append(line.format(
+                table,
+                instance,
+                objectname,
+                host,
+                add_info,
+                "=".join(["TierReservedPct", str(data["TierReservedPct"])]),
+                int(data["Performances"]["CollectionTime"][6:-2])*1000000
+            ))
+            result.append(line.format(
+                table,
+                instance,
+                objectname,
+                host,
+                add_info,
+                "=".join(["ChunkSize", str(data["ChunkSize"]["Value"])]),
+                int(data["Performances"]["CollectionTime"][6:-2])*1000000
+            ))
+            result.append(line.format(
+                table,
+                instance,
+                objectname,
+                host,
+                add_info,
+                "=".join(["MaxTierNumber", str(data["MaxTierNumber"])]),
                 int(data["Performances"]["CollectionTime"][6:-2])*1000000
             ))
         elif "virtualdisks" in data["dcs_resource"]:
