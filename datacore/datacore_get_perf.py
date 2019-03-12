@@ -433,6 +433,8 @@ def put_in_influxdb(datas):
 
 if __name__ == "__main__":
     
+    dcs_servers = {}
+
     dcs_servers = dcs_get_object("servers")
     dcs_servers_hosts = dcs_servers + dcs_get_object("hosts")
     resources = [r for r in config['RESOURCES'] if config['RESOURCES'].getboolean(r)]
