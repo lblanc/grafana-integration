@@ -2,6 +2,7 @@
 """
 Module for using DataCore REST API
 """
+from __future__ import unicode_literals
 import sys
 
 def msg_error_import(module_name):
@@ -373,6 +374,12 @@ def put_in_influxdb(datas):
                 logging.info("No __type")
                 
             add_info += ",PortType=" + str(data["PortType"])
+            
+            try:
+                add_info += ",PortRole=" + str(data["ServerPortProperties"]["Role"])
+            except:
+                add_info += ",PortRole=" + "N/A"
+
             add_info += ",Caption=" + data["Caption"].replace(" ", "\\ ")
             for k,v in data["Performances"].items():
                 if "CollectionTime" in k:

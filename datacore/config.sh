@@ -4,9 +4,14 @@ sed -i 's/datacore_server = dcs-ip/datacore_server = '${DCSSVR}'/' /etc/datacore
 sed -i 's/rest_server = rest-ip/rest_server = '${DCSREST}'/' /etc/datacore/datacore_get_perf.ini 
 sed -i 's/user = user/user = '${DCSUNAME}'/' /etc/datacore/datacore_get_perf.ini 
 sed -i 's/passwd = pass/passwd = '${DCSPWORD}'/' /etc/datacore/datacore_get_perf.ini 
-sed -i 's/ip-vcenter/'${VSPHERE_VCENTER}'/' /etc/telegraf/telegraf.conf 
-sed -i 's/username = "user"/username = "'${VSPHERE_USER}'"/' /etc/telegraf/telegraf.conf 
-sed -i 's/password = "pass"/password = "'${VSPHERE_PASS}'"/' /etc/telegraf/telegraf.conf
+
+if [ ! -z "$VSPHERE_VCENTER" ]
+then
+      sed -i 's/ip-vcenter/'${VSPHERE_VCENTER}'/' /etc/telegraf/telegraf.conf 
+      sed -i 's/username = "user"/username = "'${VSPHERE_USER}'"/' /etc/telegraf/telegraf.conf 
+      sed -i 's/password = "pass"/password = "'${VSPHERE_PASS}'"/' /etc/telegraf/telegraf.conf
+fi
+
 
 
 
@@ -36,6 +41,8 @@ grafana-cli plugins install grafana-piechart-panel
 echo "Create Influxdb DataCore database"
 curl  --silent --output /dev/null -POST 'http://127.0.0.1:8086/query?pretty=true' --data-urlencode "q=CREATE DATABASE DataCoreRestDB WITH DURATION 6w REPLICATION 1"
 
+echo "Change telegraf database retention policy"
+curl  --silent --output /dev/null -POST 'http://127.0.0.1:8086/query?pretty=true' --data-urlencode "q=ALTER RETENTION POLICY autogen ON telegraf DURATION 6w REPLICATION 1"
 
 echo "Create Grafana Data Sources"
 curl --silent --output /dev/null  -X POST \
@@ -82,10 +89,14 @@ curl --silent --output /dev/null  -X PUT \
   -d '{"theme":"","homeDashboardId":1,"timezone":""}'
 
 echo "Create Grafana vSphere Dashboards"
-python /etc/datacore/vsphere-datastore.py
-python /etc/datacore/vsphere-overview.py
-python /etc/datacore/vsphere-vms.py
-python /etc/datacore/vsphere-host.py
+if [ ! -z "$VSPHERE_VCENTER" ]
+then
+      python /etc/datacore/vsphere-datastore.py
+      python /etc/datacore/vsphere-overview.py
+      python /etc/datacore/vsphere-vms.py
+      python /etc/datacore/vsphere-host.py
+fi
+
 
 
 exec "$@"
