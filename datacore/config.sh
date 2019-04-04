@@ -39,15 +39,12 @@ find /var/lib/mysql -type f -exec touch {} \; && /etc/init.d/mysql start && slee
 grafana-cli plugins install grafana-piechart-panel
 /etc/init.d/grafana-server restart && sleep 5
 
-if [ -d "/data" ]; then
-  if [ ! -d "/data/influxdb" ]; then
-  echo "Create Influxdb DataCore database"
-  curl  --silent --output /dev/null -POST 'http://127.0.0.1:8086/query?pretty=true' --data-urlencode "q=CREATE DATABASE DataCoreRestDB WITH DURATION 6w REPLICATION 1"
 
-  echo "Change telegraf database retention policy"
-  curl  --silent --output /dev/null -POST 'http://127.0.0.1:8086/query?pretty=true' --data-urlencode "q=ALTER RETENTION POLICY autogen ON telegraf DURATION 6w REPLICATION 1"
-  fi
-fi
+echo "Create Influxdb DataCore database"
+curl  --silent --output /dev/null -POST 'http://127.0.0.1:8086/query?pretty=true' --data-urlencode "q=CREATE DATABASE DataCoreRestDB WITH DURATION 6w REPLICATION 1"
+
+echo "Change telegraf database retention policy"
+curl  --silent --output /dev/null -POST 'http://127.0.0.1:8086/query?pretty=true' --data-urlencode "q=ALTER RETENTION POLICY autogen ON telegraf DURATION 6w REPLICATION 1"
 
 
 echo "Create Grafana Data Sources"
