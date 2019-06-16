@@ -54,7 +54,8 @@ else:
     logging.basicConfig(format='%(asctime)s - %(message)s')
 
 # Construct rest url and headers
-url = "http://{}/RestService/rest.svc/1.0".format(config['SERVERS']['rest_server'])
+url = "{}://{}/RestService/rest.svc/1.0".format(config['SERVERS']['protocol'], 
+                                                config['SERVERS']['rest_server'])
 headers = {'ServerHost': config['SERVERS']['datacore_server'],
            'Authorization': 'Basic {} {}'.format(config['CREDENTIALS']['user'],
                                                  config['CREDENTIALS']['passwd'])}
@@ -109,7 +110,7 @@ def dcs_get_object(dcs_object):
     logging.info('Begin to query the REST server at {}'.format(config['SERVERS']['rest_server']))
     
     try:
-        r = requests.get('{}/{}'.format(url,dcs_object), headers=headers)
+        r = requests.get('{}/{}'.format(url,dcs_object), headers=headers, verify=False)
     except:
         logging.error("Something wrong during connection")
         sys.exit(1)
@@ -124,7 +125,7 @@ def dcs_get_object(dcs_object):
 
 
 def dcs_request_perf(dcs_object):
-    res = requests.get('{}/performance/{}'.format(url,dcs_object["Id"]), headers=headers)
+    res = requests.get('{}/performance/{}'.format(url,dcs_object["Id"]), headers=headers, verify=False)
     logging.info("Querying perf for {}".format(dcs_object["Caption"]))
     dcs_object["Performances"] = res.json()[0]
     return dcs_object
