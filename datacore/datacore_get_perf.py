@@ -180,12 +180,12 @@ def put_in_influxdb(datas):
             host = str(data["Caption"].replace(" ", "\\ "))
             # Add specific info
             add_info = ",id=" + str(data["Id"])
-            add_info += ",OsVersion=" + str(data["OsVersion"].replace(" ", "\\ "))
-            add_info += ",ProductBuild=" + str(data["ProductBuild"].replace(" ", "\\ "))
-            add_info += ",ProductVersion=" + str(data["ProductVersion"].replace(" ", "\\ "))
-            add_info += ",ProductName=" + str(data["ProductName"].replace(" ", "\\ "))
-            add_info += ",ProductType=" + str(data["ProductType"].replace(" ", "\\ "))
-            add_info += ",Caption=" + str(data["Caption"].replace(" ", "\\ "))
+            add_info += ",OsVersion=" + str(data["OsVersion"].replace(" ", "\\ ").replace(",", "\\ "))
+            add_info += ",ProductBuild=" + str(data["ProductBuild"].replace(" ", "\\ ").replace(",", "\\ "))
+            add_info += ",ProductVersion=" + str(data["ProductVersion"].replace(" ", "\\ ").replace(",", "\\ "))
+            add_info += ",ProductName=" + str(data["ProductName"].replace(" ", "\\ ").replace(",", "\\ "))
+            add_info += ",ProductType=" + str(data["ProductType"].replace(" ", "\\ ").replace(",", "\\ "))
+            add_info += ",Caption=" + str(data["Caption"].replace(" ", "\\ ").replace(",", "\\ "))
             for k,v in data["Performances"].items():
                 if "CollectionTime" in k:
                     continue
