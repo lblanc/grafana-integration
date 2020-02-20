@@ -340,7 +340,7 @@ def put_in_influxdb(datas):
             # Add specific info
             add_info = ",id=" + data["Id"]
             if data["InquiryData"]["Serial"] != None:
-                add_info += ",Serial=" + str(data["InquiryData"]["Serial"])
+                add_info += ",Serial=" + str(data["InquiryData"]["Serial"].replace(" ", "\\ "))
             else:
                 add_info += ",Serial=UNKNOWN"
             add_info += ",Type=" + str(data["Type"])
