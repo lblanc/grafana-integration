@@ -119,13 +119,12 @@ def dcs_get_object(dcs_object):
         result = []
         if dcs_object == "servers":
             for item in tmp:
-                try:
-                    test = item["__type"]
-                except:
+                test = str(item["RegionNodeId"])
+                if str(test) != "None":
                     item["dcs_resource"] = dcs_object
                     result.append(item)
                 else:
-                    logging.warning("Exception: Partner server")
+                    logging.warning("Exception: Partner server: " +item["Caption"])
             return result
         else:
             for item in tmp:
