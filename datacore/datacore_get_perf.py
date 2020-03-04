@@ -175,16 +175,16 @@ def put_in_influxdb(datas):
             line = "{},instance={},objectname={},host={}{} {} {}"
             table = "DataCore_Servers"
             objectname = "DataCore\ Servers"
-            instance = str(data["ExtendedCaption"].replace(" ", "\\ "))
-            host = str(data["Caption"].replace(" ", "\\ "))
+            instance = str(data["ExtendedCaption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
+            host = str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             # Add specific info
             add_info = ",id=" + str(data["Id"])
-            add_info += ",OsVersion=" + str(data["OsVersion"].replace(" ", "\\ ").replace(",", "\\ "))
-            add_info += ",ProductBuild=" + str(data["ProductBuild"].replace(" ", "\\ ").replace(",", "\\ "))
-            add_info += ",ProductVersion=" + str(data["ProductVersion"].replace(" ", "\\ ").replace(",", "\\ "))
-            add_info += ",ProductName=" + str(data["ProductName"].replace(" ", "\\ ").replace(",", "\\ "))
-            add_info += ",ProductType=" + str(data["ProductType"].replace(" ", "\\ ").replace(",", "\\ "))
-            add_info += ",Caption=" + str(data["Caption"].replace(" ", "\\ ").replace(",", "\\ "))
+            add_info += ",OsVersion=" + str(data["OsVersion"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
+            add_info += ",ProductBuild=" + str(data["ProductBuild"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
+            add_info += ",ProductVersion=" + str(data["ProductVersion"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
+            add_info += ",ProductName=" + str(data["ProductName"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
+            add_info += ",ProductType=" + str(data["ProductType"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
+            add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             for k,v in data["Performances"].items():
                 if "CollectionTime" in k:
                     continue
@@ -228,14 +228,14 @@ def put_in_influxdb(datas):
             line = "{},instance={},objectname={},host={}{} {} {}"
             table = "DataCore_Disk_pools"
             objectname = "DataCore\ Disk\ pools"
-            instance = str(data["ExtendedCaption"].replace(" ", "\\ "))
+            instance = str(data["ExtendedCaption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             host = str(dcs_caption_from_id(data["ServerId"],dcs_servers))
             host = host.replace(" ", "\\ ")
             # Add specific info
             add_info = ",id=" + str(data["Id"])
             add_info += ",InSharedMode=" + str(data["InSharedMode"])
             add_info += ",AutoTieringEnabled=" + str(data["AutoTieringEnabled"])
-            add_info += ",Caption=" + str(data["Caption"].replace(" ", "\\ "))
+            add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             for k,v in data["Performances"].items():
                 if "CollectionTime" in k:
                     continue
@@ -288,7 +288,7 @@ def put_in_influxdb(datas):
             line = "{},instance={},objectname={},host={}{} {} {}"
             table = "DataCore_Virtual_Disks"
             objectname = "DataCore\ Virtual\ disks"
-            instance = str(data["ExtendedCaption"].replace(" ", "\\ "))
+            instance = str(data["ExtendedCaption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             host = 'NA'
             # Add specific info
             add_info = ",id=" + str(data["Id"])
@@ -298,7 +298,7 @@ def put_in_influxdb(datas):
                 add_info += ",FirstHost=" + str(dcs_caption_from_id(data["FirstHostId"],dcs_servers))
             if data["SecondHostId"] != None:
                 add_info += ",SecondHost=" + str(dcs_caption_from_id(data["SecondHostId"],dcs_servers))
-            add_info += ",Caption=" + str(data["Caption"].replace(" ", "\\ "))
+            add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             for k,v in data["Performances"].items():
                 if "CollectionTime" in k:
                     continue
@@ -333,17 +333,17 @@ def put_in_influxdb(datas):
             line = "{},instance={},objectname={},host={}{} {} {}"
             table = "DataCore_Physical_disk"
             objectname = "DataCore\ Physical\ disk"
-            instance = str(data["ExtendedCaption"].replace(" ", "\\ "))
+            instance = str(data["ExtendedCaption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             host = str(dcs_caption_from_id(data["HostId"],dcs_servers_hosts))
             host = host.replace(" ", "\\ ")
             # Add specific info
             add_info = ",id=" + data["Id"]
             if data["InquiryData"]["Serial"] != None:
-                add_info += ",Serial=" + str(data["InquiryData"]["Serial"].replace(" ", "\\ "))
+                add_info += ",Serial=" + str(data["InquiryData"]["Serial"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             else:
                 add_info += ",Serial=UNKNOWN"
             add_info += ",Type=" + str(data["Type"])
-            add_info += ",Caption=" + str(data["Caption"].replace(" ", "\\ "))
+            add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             for k,v in data["Performances"].items():
                 if "CollectionTime" in k:
                     continue
@@ -369,7 +369,7 @@ def put_in_influxdb(datas):
             line = "{},instance={},objectname={},host={}{} {} {}"
             table = "DataCore_SCSI_ports"
             objectname = "DataCore\ SCSI\ ports"
-            instance = str(data["ExtendedCaption"].replace(" ", "\\ "))
+            instance = str(data["ExtendedCaption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             if data["HostId"] != None:
                 host = str(dcs_caption_from_id(data["HostId"],dcs_servers_hosts))
                 host = host.replace(" ", "\\ ")
@@ -391,7 +391,7 @@ def put_in_influxdb(datas):
             except:
                 add_info += ",PortRole=" + "N/A"
 
-            add_info += ",Caption=" + str(data["Caption"].replace(" ", "\\ "))
+            add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             for k,v in data["Performances"].items():
                 if "CollectionTime" in k:
                     continue
@@ -408,8 +408,8 @@ def put_in_influxdb(datas):
             line = "{},instance={},objectname={},host={}{} {} {}"
             table = "DataCore_Hosts"
             objectname = "DataCore\ Hosts"
-            instance = str(data["ExtendedCaption"].replace(" ", "\\ "))
-            host = str(data["Caption"].replace(" ", "\\ "))
+            instance = str(data["ExtendedCaption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
+            host = str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             # Add specific info
             add_info = ",id=" + str(data["Id"])
             add_info += ",MpioCapable=" + str(data["MpioCapable"])
