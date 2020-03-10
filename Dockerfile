@@ -25,7 +25,7 @@ RUN mkdir /data-docker && mkdir /data-docker/mysql && mkdir /data-docker/influxd
  rm /var/lib/apt/lists/* -vf && \
  apt-get -y update && \
  apt-get -y dist-upgrade && \
- apt-get -y --force-yes install \
+ apt-get -y --allow-downgrades install \
   apt-utils \
   ca-certificates \
   curl \
