@@ -32,8 +32,8 @@ RUN mkdir /data-docker && mkdir /data-docker/mysql && mkdir /data-docker/influxd
   git \
   htop \
   libfontconfig \
-  mysql-client \
-  mysql-server \
+  default-mysql-client \
+  default-mysql-server \
   nano \
   gnupg2 \
   gnupg1 \
@@ -60,7 +60,7 @@ RUN mkdir /data-docker && mkdir /data-docker/mysql && mkdir /data-docker/influxd
   apt-key add influxdb.key && \
   echo "deb https://repos.influxdata.com/debian buster stable" |  tee /etc/apt/sources.list.d/influxdb.list && \
   apt-get update && \
-  apt-get install telegraf
+  apt-get install telegraf chronograf
  
 
 # Configure Supervisord, SSH, base env, cron and MySql
@@ -78,8 +78,8 @@ RUN mkdir -p /var/log/supervisor && \
 
 
 # Install InfluxDB / Telegraf / chronograf 
-RUN wget https://dl.influxdata.com/chronograf/releases/chronograf_1.6.2_amd64.deb && \
-    dpkg -i chronograf_1.6.2_amd64.deb && rm chronograf_1.6.2_amd64.deb
+#RUN wget https://dl.influxdata.com/chronograf/releases/chronograf_1.6.2_amd64.deb && \
+#    dpkg -i chronograf_1.6.2_amd64.deb && rm chronograf_1.6.2_amd64.deb
 
 
 # Configure InfluxDB
