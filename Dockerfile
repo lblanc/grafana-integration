@@ -1,4 +1,4 @@
-FROM debian:9
+FROM debian:10
 MAINTAINER Luc Blanc <email@luc-blanc.com>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -58,9 +58,9 @@ RUN mkdir /data-docker && mkdir /data-docker/mysql && mkdir /data-docker/influxd
   apt-get install grafana && \
   wget https://repos.influxdata.com/influxdb.key && \
   apt-key add influxdb.key && \
-  echo "deb https://repos.influxdata.com/debian stretch stable" |  tee /etc/apt/sources.list.d/influxdb.list && \
+  echo "deb https://repos.influxdata.com/debian buster stable" |  tee /etc/apt/sources.list.d/influxdb.list && \
   apt-get update && \
-  apt-get install telegraf
+  apt-get install telegraf chronograf
  
 
 # Configure Supervisord, SSH, base env, cron and MySql
@@ -78,9 +78,8 @@ RUN mkdir -p /var/log/supervisor && \
 
 
 # Install InfluxDB / Telegraf / chronograf 
-RUN wget https://dl.influxdata.com/chronograf/releases/chronograf_1.6.2_amd64.deb && \
-    dpkg -i chronograf_1.6.2_amd64.deb && rm chronograf_1.6.2_amd64.deb
-
+#RUN wget https://dl.influxdata.com/chronograf/releases/chronograf_1.6.2_amd64.deb && \
+#    dpkg -i chronograf_1.6.2_amd64.deb && rm chronograf_1.6.2_amd64.deb
 
 
 # Configure InfluxDB
