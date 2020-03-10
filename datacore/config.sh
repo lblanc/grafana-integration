@@ -3,13 +3,13 @@
 sed -i 's/datacore_server = dcs-ip/datacore_server = '${DCSSVR}'/' /etc/datacore/datacore_get_perf.ini 
 sed -i 's/rest_server = rest-ip/rest_server = '${DCSREST}'/' /etc/datacore/datacore_get_perf.ini 
 sed -i 's/user = user/user = '${DCSUNAME}'/' /etc/datacore/datacore_get_perf.ini 
-sed -i 's/passwd = pass/passwd = ''${DCSPWORD}''/' /etc/datacore/datacore_get_perf.ini 
+sed -i 's/passwd = pass/passwd = '${DCSPWORD}'/' /etc/datacore/datacore_get_perf.ini 
 
 if [ ! -z "$VSPHERE_VCENTER" ]
 then
       sed -i 's/ip-vcenter/'${VSPHERE_VCENTER}'/' /etc/telegraf/telegraf.conf 
       sed -i 's/username = "user"/username = "'${VSPHERE_USER}'"/' /etc/telegraf/telegraf.conf 
-      sed -i 's/password = "pass"/password = "''${VSPHERE_PASS}''"/' /etc/telegraf/telegraf.conf
+      sed -i 's/password = "pass"/password = "'${VSPHERE_PASS}'"/' /etc/telegraf/telegraf.conf
 fi
 
 
