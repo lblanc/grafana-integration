@@ -77,11 +77,6 @@ RUN mkdir -p /var/log/supervisor && \
     chmod +x /etc/datacore/config.sh
 
 
-# Install InfluxDB / Telegraf / chronograf 
-#RUN wget https://dl.influxdata.com/chronograf/releases/chronograf_1.6.2_amd64.deb && \
-#    dpkg -i chronograf_1.6.2_amd64.deb && rm chronograf_1.6.2_amd64.deb
-
-
 # Configure InfluxDB
 COPY influxdb/init.sh /etc/init.d/influxdb
 
