@@ -80,6 +80,7 @@ curl --silent --output /dev/null  -X POST \
 echo "Create Grafana DataCore Dashboard"
 python /etc/datacore/datacore-overview.py
 python /etc/datacore/datacore-dashboard.py
+python /etc/datacore/datacore-hosts.py
 
 
 echo "Set DataCore Dashboard as home"
