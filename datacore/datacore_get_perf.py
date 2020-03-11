@@ -285,50 +285,51 @@ def put_in_influxdb(datas):
                 int(data["Performances"]["CollectionTime"][6:-2])*1000000
             ))
         elif "virtualdisks" in data["dcs_resource"]:
-            line = "{},instance={},objectname={},host={}{} {} {}"
-            table = "DataCore_Virtual_Disks"
-            objectname = "DataCore\ Virtual\ disks"
-            instance = str(data["ExtendedCaption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
-            host = 'NA'
-            # Add specific info
-            add_info = ",id=" + str(data["Id"])
-            add_info += ",ScsiDeviceIdString=" + str(data["ScsiDeviceIdString"])
-            add_info += ",Type=" + str(data["Type"])
-            if data["FirstHostId"] != None:
-                add_info += ",FirstHost=" + str(dcs_caption_from_id(data["FirstHostId"],dcs_servers))
-            if data["SecondHostId"] != None:
-                add_info += ",SecondHost=" + str(dcs_caption_from_id(data["SecondHostId"],dcs_servers))
-            add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
-            for k,v in data["Performances"].items():
-                if "CollectionTime" in k:
-                    continue
+            if data["StorageProfileId"] != None:
+                line = "{},instance={},objectname={},host={}{} {} {}"
+                table = "DataCore_Virtual_Disks"
+                objectname = "DataCore\ Virtual\ disks"
+                instance = str(data["ExtendedCaption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
+                host = 'NA'
+                # Add specific info
+                add_info = ",id=" + str(data["Id"])
+                add_info += ",ScsiDeviceIdString=" + str(data["ScsiDeviceIdString"])
+                add_info += ",Type=" + str(data["Type"])
+                if data["FirstHostId"] != None:
+                    add_info += ",FirstHost=" + str(dcs_caption_from_id(data["FirstHostId"],dcs_servers))
+                if data["SecondHostId"] != None:
+                    add_info += ",SecondHost=" + str(dcs_caption_from_id(data["SecondHostId"],dcs_servers))
+                add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
+                for k,v in data["Performances"].items():
+                    if "CollectionTime" in k:
+                        continue
+                    result.append(line.format(
+                        table,
+                        instance,
+                        objectname,
+                        host,
+                        add_info,
+                        "=".join([str(k), str(v)]),
+                        int(data["Performances"]["CollectionTime"][6:-2])*1000000
+                    ))
                 result.append(line.format(
-                    table,
-                    instance,
-                    objectname,
-                    host,
-                    add_info,
-                    "=".join([str(k), str(v)]),
-                    int(data["Performances"]["CollectionTime"][6:-2])*1000000
-                ))
-            result.append(line.format(
-                    table,
-                    instance,
-                    objectname,
-                    host,
-                    add_info,
-                    "=".join(["DiskStatus", str(data["DiskStatus"])]),
-                    int(data["Performances"]["CollectionTime"][6:-2])*1000000
-                ))
-            result.append(line.format(
-                    table,
-                    instance,
-                    objectname,
-                    host,
-                    add_info,
-                    "=".join(["Size", str(data["Size"]["Value"])]),
-                    int(data["Performances"]["CollectionTime"][6:-2])*1000000
-                ))
+                        table,
+                        instance,
+                        objectname,
+                        host,
+                        add_info,
+                        "=".join(["DiskStatus", str(data["DiskStatus"])]),
+                        int(data["Performances"]["CollectionTime"][6:-2])*1000000
+                    ))
+                result.append(line.format(
+                        table,
+                        instance,
+                        objectname,
+                        host,
+                        add_info,
+                        "=".join(["Size", str(data["Size"]["Value"])]),
+                        int(data["Performances"]["CollectionTime"][6:-2])*1000000
+                    ))
         elif "physicaldisks" in data["dcs_resource"]:
             line = "{},instance={},objectname={},host={}{} {} {}"
             table = "DataCore_Physical_disk"
