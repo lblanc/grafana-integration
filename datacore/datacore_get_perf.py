@@ -426,7 +426,7 @@ def put_in_influxdb(datas):
                     "=".join([str(k), str(v)]),
                     int(data["Performances"]["CollectionTime"][6:-2])*1000000
                 ))
-             result.append(line.format(
+            result.append(line.format(
                 table,
                 instance,
                 objectname,
