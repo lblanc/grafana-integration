@@ -426,6 +426,15 @@ def put_in_influxdb(datas):
                     "=".join([str(k), str(v)]),
                     int(data["Performances"]["CollectionTime"][6:-2])*1000000
                 ))
+             result.append(line.format(
+                table,
+                instance,
+                objectname,
+                host,
+                add_info,
+                "=".join(["State", str(data["State"])]),
+                int(data["Performances"]["CollectionTime"][6:-2])*1000000
+             ))
         else:
             logging.error("This resource ({}) is not yet implemented".format(resource))
     
