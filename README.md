@@ -24,10 +24,10 @@ docker run --ulimit nofile=66000:66000 \
   -p 8086:8086 \
   -p 22022:22 \
   -p 8125:8125/udp \
-  -e "DCSSVR=X.X.X.X" \
-  -e "DCSREST=X.X.X.X" \
-  -e "DCSUNAME=administrator" \
-  -e "DCSPWORD=password" \
+  -e DCSSVR='X.X.X.X' \
+  -e DCSREST='X.X.X.X' \
+  -e DCSUNAME='administrator' \
+  -e DCSPWORD='password' \
   lblanc/grafana-integration:latest
 ```
 If you have special characters in the password, do not forget the escapement '' before (ex: "password!" will be "password\\!")
@@ -48,13 +48,13 @@ docker run --ulimit nofile=66000:66000 \
   -p 8086:8086 \
   -p 22022:22 \
   -p 8125:8125/udp \
-  -e "DCSSVR=X.X.X.X" \
-  -e "DCSREST=X.X.X.X" \
-  -e "DCSUNAME=administrator" \
-  -e "DCSPWORD=password" \
-  -e "VSPHERE_USER=administrator@vsphere.local" \
-  -e "VSPHERE_PASS=password" \
-  -e "VSPHERE_VCENTER=X.X.X.X" \
+  -e DCSSVR='X.X.X.X' \
+  -e DCSREST='X.X.X.X' \
+  -e DCSUNAME='administrator' \
+  -e DCSPWORD='password' \
+  -e VSPHERE_USER='administrator@vsphere.local' \
+  -e VSPHERE_PASS='password' \
+  -e VSPHERE_VCENTER='X.X.X.X' \
   lblanc/grafana-integration:latest
 ```
 
@@ -83,13 +83,13 @@ docker run --ulimit nofile=66000:66000 \
   -p 22022:22 \
   -p 8125:8125/udp \
   -v my-volume:/data \
-  -e "DCSSVR=X.X.X.X" \
-  -e "DCSREST=X.X.X.X" \
-  -e "DCSUNAME=administrator" \
-  -e "DCSPWORD=password" \
-  -e "VSPHERE_USER=administrator@vsphere.local" \
-  -e "VSPHERE_PASS=password" \
-  -e "VSPHERE_VCENTER=X.X.X.X" \
+  -e DCSSVR='X.X.X.X' \
+  -e DCSREST='X.X.X.X' \
+  -e DCSUNAME='administrator' \
+  -e DCSPWORD='password' \
+  -e VSPHERE_USER='administrator@vsphere.local' \
+  -e VSPHERE_PASS='password' \
+  -e VSPHERE_VCENTER='X.X.X.X' \
   lblanc/grafana-integration:latest
 ```
 
