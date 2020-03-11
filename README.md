@@ -30,7 +30,6 @@ docker run --ulimit nofile=66000:66000 \
   -e DCSPWORD='password' \
   lblanc/grafana-integration:latest
 ```
-If you have special characters in the password, do not forget the escapement '' before (ex: "password!" will be "password\\!")
 
 
 If you want to monitor also vSphere you can add this variables:
