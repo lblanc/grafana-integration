@@ -126,6 +126,20 @@ def dcs_get_object(dcs_object):
                 else:
                     logging.warning("Exception: Partner server: " +item["Caption"])
             return result
+        elif dcs_object == "ports":      
+            for item in tmp:
+                if "Microsoft iSCSI" in item["Caption"] or "Loop" in item["Caption"]:
+                    test = 1
+                else:
+                    item["dcs_resource"] = dcs_object
+                    result.append(item)
+            return result
+        elif dcs_object == "physicaldisks":
+            for item in tmp:
+                if item["Type"] == 4:
+                    item["dcs_resource"] = dcs_object
+                    result.append(item)
+            return result
         else:
             for item in tmp:
                 item["dcs_resource"] = dcs_object
