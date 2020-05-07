@@ -6,7 +6,7 @@
 
 Goal is to have grafana, influxdb and python script running to grab DataCore SANsymphony REST API performances
 
-## Prerequisites
+# Prerequisites
 In order to use this container, you must have the following in place already:
   * DataCore SANsymphony 10.0 PSP9 or later
   * DataCore REST Server 2.01 or later
