@@ -116,6 +116,9 @@ def dcs_get_object(dcs_object):
     else:
         logging.info("Querying {}".format(dcs_object))
         tmp = r.json()
+        if tmp["ErrorCode"]:
+            logging.error(tmp["Message"])
+            sys.exit(1)
         result = []
         if dcs_object == "servers":
             for item in tmp:
