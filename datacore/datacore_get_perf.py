@@ -207,6 +207,9 @@ def put_in_influxdb(datas):
             add_info += ",ProductType=" + str(data["ProductType"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             for k,v in data["Performances"].items():
+                if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
+                    logging.error("TimeCollection error")
+                    sys.exit(1)
                 if "CollectionTime" in k:
                     continue
                 result.append(line.format(
@@ -258,6 +261,9 @@ def put_in_influxdb(datas):
             add_info += ",AutoTieringEnabled=" + str(data["AutoTieringEnabled"])
             add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             for k,v in data["Performances"].items():
+                if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
+                    logging.error("TimeCollection error")
+                    sys.exit(1)
                 if "CollectionTime" in k:
                     continue
                 result.append(line.format(
@@ -322,6 +328,9 @@ def put_in_influxdb(datas):
                     add_info += ",SecondHost=" + str(dcs_caption_from_id(data["SecondHostId"],dcs_servers))
                 add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
                 for k,v in data["Performances"].items():
+                    if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
+                    logging.error("TimeCollection error")
+                    sys.exit(1)
                     if "CollectionTime" in k:
                         continue
                     result.append(line.format(
@@ -367,6 +376,9 @@ def put_in_influxdb(datas):
             add_info += ",Type=" + str(data["Type"])
             add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             for k,v in data["Performances"].items():
+                if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
+                    logging.error("TimeCollection error")
+                    sys.exit(1)
                 if "CollectionTime" in k:
                     continue
                 result.append(line.format(
@@ -415,6 +427,9 @@ def put_in_influxdb(datas):
 
             add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
             for k,v in data["Performances"].items():
+                if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
+                    logging.error("TimeCollection error")
+                    sys.exit(1)
                 if "CollectionTime" in k:
                     continue
                 result.append(line.format(
@@ -437,6 +452,9 @@ def put_in_influxdb(datas):
             add_info += ",MpioCapable=" + str(data["MpioCapable"])
             add_info += ",AluaSupport=" + str(data["AluaSupport"])
             for k,v in data["Performances"].items():
+                if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
+                    logging.error("TimeCollection error")
+                    sys.exit(1)
                 if "CollectionTime" in k:
                     continue
                 result.append(line.format(
