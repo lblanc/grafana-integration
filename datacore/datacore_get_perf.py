@@ -209,7 +209,7 @@ def put_in_influxdb(datas):
             for k,v in data["Performances"].items():
                 if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
                     logging.error("TimeCollection error")
-                    sys.exit(1)
+                    break
                 if "CollectionTime" in k:
                     continue
                 result.append(line.format(
@@ -263,7 +263,7 @@ def put_in_influxdb(datas):
             for k,v in data["Performances"].items():
                 if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
                     logging.error("TimeCollection error")
-                    sys.exit(1)
+                    break
                 if "CollectionTime" in k:
                     continue
                 result.append(line.format(
@@ -330,7 +330,7 @@ def put_in_influxdb(datas):
                 for k,v in data["Performances"].items():
                     if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
                         logging.error("TimeCollection error")
-                        sys.exit(1)
+                        break
                     if "CollectionTime" in k:
                         continue
                     result.append(line.format(
@@ -378,7 +378,7 @@ def put_in_influxdb(datas):
             for k,v in data["Performances"].items():
                 if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
                     logging.error("TimeCollection error")
-                    sys.exit(1)
+                    break
                 if "CollectionTime" in k:
                     continue
                 result.append(line.format(
@@ -429,7 +429,7 @@ def put_in_influxdb(datas):
             for k,v in data["Performances"].items():
                 if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
                     logging.error("TimeCollection error")
-                    sys.exit(1)
+                    break
                 if "CollectionTime" in k:
                     continue
                 result.append(line.format(
@@ -454,7 +454,7 @@ def put_in_influxdb(datas):
             for k,v in data["Performances"].items():
                 if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
                     logging.error("TimeCollection error")
-                    sys.exit(1)
+                    break
                 if "CollectionTime" in k:
                     continue
                 result.append(line.format(
