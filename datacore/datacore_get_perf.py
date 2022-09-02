@@ -329,8 +329,8 @@ def put_in_influxdb(datas):
                 add_info += ",Caption=" + str(data["Caption"].encode("ascii","ignore").strip()).replace(" ", "\\ ").replace(",", "\\ ")
                 for k,v in data["Performances"].items():
                     if int(data["Performances"]["CollectionTime"][6:-2])*1000000 < 0:
-                    logging.error("TimeCollection error")
-                    sys.exit(1)
+                        logging.error("TimeCollection error")
+                        sys.exit(1)
                     if "CollectionTime" in k:
                         continue
                     result.append(line.format(
