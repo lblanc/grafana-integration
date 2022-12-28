@@ -1,7 +1,7 @@
-* * * * *       root    (python /etc/datacore/datacore_get_perf.py) > /dev/null
-* * * * *       root    (sleep 10; python /etc/datacore/datacore_get_perf.py) > /dev/null
-* * * * *       root    (sleep 20; python /etc/datacore/datacore_get_perf.py) > /dev/null
-* * * * *       root    (sleep 30; python /etc/datacore/datacore_get_perf.py) > /dev/null
-* * * * *       root    (sleep 40; python /etc/datacore/datacore_get_perf.py) > /dev/null
-* * * * *       root    (sleep 50; python /etc/datacore/datacore_get_perf.py) > /dev/null
+* * * * *       root    (python /etc/datacore/datacore_get_perf.py) > /dev/null 2>&1
+* * * * *       root    (sleep 10; python /etc/datacore/datacore_get_perf.py) > /dev/null 2>&1
+* * * * *       root    (sleep 20; python /etc/datacore/datacore_get_perf.py) > /dev/null 2>&1
+* * * * *       root    (sleep 30; python /etc/datacore/datacore_get_perf.py) > /dev/null 2>&1
+* * * * *       root    (sleep 40; python /etc/datacore/datacore_get_perf.py) > /dev/null 2>&1
+* * * * *       root    (sleep 50; python /etc/datacore/datacore_get_perf.py) > /dev/null 2>&1
 #
