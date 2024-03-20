@@ -1,4 +1,4 @@
-FROM debian:10
+FROM debian:12
 MAINTAINER Luc Blanc <email@luc-blanc.com>
 
 ENV DEBIAN_FRONTEND noninteractive
