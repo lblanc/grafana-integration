@@ -43,7 +43,9 @@ RUN mkdir /data-docker && mkdir /data-docker/mysql && mkdir /data-docker/influxd
   vim \
   supervisor \
   apt-transport-https \
-  cl-py-configparser \
+  python-configparser \
+  python-concurrent.futures \
+  python-requests \
   cron \
   influxdb \
   wget && \
